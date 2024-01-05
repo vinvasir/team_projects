@@ -18,3 +18,23 @@ test('it creates a team if provided a valid string for the name', function () {
 
     $this->assertEquals($teamName, $team->name);
 });
+
+test('it returns an error status if nothing is provided for the name input', function () {
+    $response = $this->post('/api/teams', []);
+
+    $response->assertStatus(302);
+
+    $team = Team::first();
+
+    $this->assertNull($team);
+});
+
+test('it returns an error status if the name input is not a string', function () {
+    $response = $this->post('/api/teams', ['name' => 42]);
+
+    $response->assertStatus(302);
+
+    $team = Team::where(['name' => 42])->first();
+
+    $this->assertNull($team);
+});
