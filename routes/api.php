@@ -30,4 +30,5 @@ Route::resource('projects', ProjectController::class);
 
 Route::put('/members/{member}/teams', [MemberTeamController::class, 'update']);
 Route::get('/teams/{team}/members', [TeamMemberController::class, 'index']);
+Route::get('/projects/{project}/members', [ProjectMemberController::class, 'index']);
 Route::post('/projects/{project}/members', [ProjectMemberController::class, 'store']);
