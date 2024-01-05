@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
 use App\Models\Team;
-use Error;
+use Exception;
 use Illuminate\Http\Request;
 
 class TeamsController extends Controller
@@ -26,8 +26,10 @@ class TeamsController extends Controller
     {
     }
 
-    public function update(Request $request, $id)
+    public function update(TeamRequest $request, Team $team)
     {
+        $team->updateOrFail(['name' => $request->get('name')]);
+        return response()->json(['message' => 'Successfully updated the team.'], 204);
     }
 
     public function destroy($id)

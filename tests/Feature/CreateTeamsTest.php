@@ -22,7 +22,7 @@ test('it creates a team if provided a valid string for the name', function () {
 test('it returns an error status if nothing is provided for the name input', function () {
     $response = $this->post('/api/teams', []);
 
-    $response->assertStatus(302);
+    $response->assertStatus(422);
 
     $team = Team::first();
 
@@ -32,7 +32,7 @@ test('it returns an error status if nothing is provided for the name input', fun
 test('it returns an error status if the name input is not a string', function () {
     $response = $this->post('/api/teams', ['name' => 42]);
 
-    $response->assertStatus(302);
+    $response->assertStatus(422);
 
     $team = Team::where(['name' => 42])->first();
 
