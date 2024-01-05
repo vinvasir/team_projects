@@ -23,7 +23,7 @@ test('it allows the addition of city, state, and country', function () {
     $lastName = 'Dev';
     $city = 'Los Angeles';
     $state = 'CA';
-    $country = 'USA';
+    $country = 'US';
 
     $response = $this->post('/api/members', [
         'first_name' => $firstName,
@@ -65,5 +65,45 @@ it('provides an http error if first_name or last_name are not strings', function
 
     $response->assertStatus(422);
     $member = Member::where(['first_name' => 'Programmer'])->first();
+    $this->assertNull($member);
+});
+
+it('rejects an otherwise correct request that provides an invalid country abbreviation', function () {
+    $firstName = 'Programmer';
+    $lastName = 'Dev';
+    $city = 'Los Angeles';
+    $state = 'CA';
+    $country = 'USofB';
+
+    $response = $this->post('/api/members', [
+        'first_name' => $firstName,
+        'last_name' => $lastName,
+        'city' => $city,
+        'state' => $state,
+        'country' => $country
+    ]);
+
+    $response->assertStatus(422);
+    $member = Member::where(['last_name' => $lastName])->first();
+    $this->assertNull($member);
+});
+
+it('rejects an otherwise correct request if a state is provided that does not belong to the country provided', function () {
+    $firstName = 'Programmer';
+    $lastName = 'Dev';
+    $city = 'Los Angeles';
+    $state = 'CA';
+    $country = 'GB';
+
+    $response = $this->post('/api/members', [
+        'first_name' => $firstName,
+        'last_name' => $lastName,
+        'city' => $city,
+        'state' => $state,
+        'country' => $country
+    ]);
+
+    $response->assertStatus(422);
+    $member = Member::where(['last_name' => $lastName])->first();
     $this->assertNull($member);
 });
