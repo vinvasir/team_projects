@@ -10,7 +10,10 @@ class MemberController extends Controller
 {
     public function index()
     {
-        return MemberResource::collection(Member::orderBy('last_name', 'asc')->paginate(10));
+        return MemberResource::collection(
+            Member::orderBy('last_name', 'asc')
+                ->paginate(10)
+        );
     }
 
     public function store(MemberRequest $request)
