@@ -4,7 +4,7 @@
 use App\Models\Team;
 
 test('it displays all teams in alphabetical order with pagination data', function () {
-    $teams = Team::factory(20)->create();
+    Team::factory(20)->create();
 
     $response = $this->get('/api/teams');
 

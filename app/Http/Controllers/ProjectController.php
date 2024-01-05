@@ -10,7 +10,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        return ProjectResource::collection(Project::all());
+        return ProjectResource::collection(Project::orderBy('name', 'asc')->paginate(10));
     }
 
     public function store(ProjectRequest $request)
