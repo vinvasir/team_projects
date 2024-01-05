@@ -32,7 +32,13 @@ class TeamsController extends Controller
         return response()->json(['message' => 'Successfully updated the team.'], 204);
     }
 
-    public function destroy($id)
+    public function destroy(Team $team)
     {
+        try {
+            $team->deleteOrFail();
+            return response()->json(['message' => 'Successfully deleted team.'], 204);
+        } catch (Exception $x) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 }
