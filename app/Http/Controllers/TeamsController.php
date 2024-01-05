@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
+use App\Http\Resources\TeamResource;
 use App\Models\Team;
 use Exception;
 use Illuminate\Http\Request;
@@ -11,7 +12,9 @@ class TeamsController extends Controller
 {
     public function index()
     {
+        $teams = Team::orderBy('name', 'asc')->paginate(10);
 
+        return TeamResource::collection($teams);
     }
 
     public function store(TeamRequest $request)
