@@ -16,6 +16,7 @@ class MemberRequest extends ApiFormRequest
         }
 
         return [
+            'team_id' => 'required|exists:teams,id',
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'city' => ['nullable'],

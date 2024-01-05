@@ -12,6 +12,7 @@ class Member extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
+        'team_id',
         'first_name',
         'last_name',
         'city',

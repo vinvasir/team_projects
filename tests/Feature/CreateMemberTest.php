@@ -2,12 +2,14 @@
 
 
 use App\Models\Member;
+use App\Models\Team;
 
 test('it creates a member if provided a first_name and last_name', function () {
     $firstName = 'Programmer';
     $lastName = 'Dev';
 
     $response = $this->post('/api/members', [
+        'team_id' => Team::factory()->create()->id,
         'first_name' => $firstName,
         'last_name' => $lastName
     ]);
@@ -26,6 +28,7 @@ test('it allows the addition of city, state, and country', function () {
     $country = 'US';
 
     $response = $this->post('/api/members', [
+        'team_id' => Team::factory()->create()->id,
         'first_name' => $firstName,
         'last_name' => $lastName,
         'city' => $city,
@@ -46,6 +49,7 @@ it('returns an http error if missing a first_name or last_name', function () {
     $lastName = 'Dev';
 
     $response = $this->post('/api/members', [
+        'team_id' => Team::factory()->create()->id,
         'last_name' => $lastName
     ]);
 
@@ -59,6 +63,7 @@ it('provides an http error if first_name or last_name are not strings', function
     $lastName = 42;
 
     $response = $this->post('/api/members', [
+        'team_id' => Team::factory()->create()->id,
         'first_name' => $firstName,
         'last_name' => $lastName
     ]);
@@ -76,6 +81,7 @@ it('rejects an otherwise correct request that provides an invalid country abbrev
     $country = 'USofB';
 
     $response = $this->post('/api/members', [
+        'team_id' => Team::factory()->create()->id,
         'first_name' => $firstName,
         'last_name' => $lastName,
         'city' => $city,
@@ -96,6 +102,7 @@ it('rejects an otherwise correct request if a state is provided that does not be
     $country = 'GB';
 
     $response = $this->post('/api/members', [
+        'team_id' => Team::factory()->create()->id,
         'first_name' => $firstName,
         'last_name' => $lastName,
         'city' => $city,
