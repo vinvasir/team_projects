@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MemberTeamController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TeamsController;
 use Illuminate\Http\Request;
@@ -24,3 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('teams', TeamsController::class);
 Route::resource('members', MemberController::class);
 Route::resource('projects', ProjectController::class);
+
+Route::put('/members/{member}/teams', [MemberTeamController::class, 'update']);
