@@ -3,6 +3,7 @@
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberTeamController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectMemberController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\TeamsController;
 use Illuminate\Http\Request;
@@ -29,3 +30,4 @@ Route::resource('projects', ProjectController::class);
 
 Route::put('/members/{member}/teams', [MemberTeamController::class, 'update']);
 Route::get('/teams/{team}/members', [TeamMemberController::class, 'index']);
+Route::post('/projects/{project}/members', [ProjectMemberController::class, 'store']);
