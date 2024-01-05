@@ -1,7 +1,6 @@
 <?php
 
 
-use App\Http\Resources\TeamResource;
 use App\Models\Team;
 
 test('it displays all teams in alphabetical order with pagination data', function () {

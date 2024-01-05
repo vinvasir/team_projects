@@ -25,8 +25,9 @@ class TeamsController extends Controller
         return response()->json(['message' => 'Successfully created a team'], 201);
     }
 
-    public function show($id)
+    public function show(Team $team)
     {
+        return new TeamResource($team);
     }
 
     public function update(TeamRequest $request, Team $team)
